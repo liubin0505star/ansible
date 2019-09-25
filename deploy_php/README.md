@@ -17,7 +17,7 @@
 * 结合 Jenkins，使用 git tag 作为版本号  
 `ansible-playbook -e "job_name=wordpress release_version=${tag}" /etc/ansible/deploy.yml`
 
-* 发布代码的同时，也设置保留多少个历史版本,其他的老版本将被删除 
+* 发布代码的同时，也设置保留多少个历史版本,其他的老版本将被删除  
 `ansible-playbook -e "job_name=wordpress release_version=$(date +%Y%m%d%H%M%S) keep_releases=3" /etc/ansible/deploy.yml`
 
 # 回滚：
