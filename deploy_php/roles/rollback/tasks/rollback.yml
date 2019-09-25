@@ -1,0 +1,7 @@
+---
+- name: Rollback application link to old release
+  file:
+    state: link
+    path: "{{ app_path }}"
+    src: "{{ rollback_release_path.stat.path }}"
+  when: rollback_release_path.stat.exists == true

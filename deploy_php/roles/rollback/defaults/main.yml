@@ -1,0 +1,9 @@
+---
+# 代码部署的目标目录所在路径
+rollback_basedir: "/opt/app/{{ job_name }}"
+
+# 应用的路径
+app_path: "/var/www/{{ job_name }}"
+
+# 回滚到哪一个版本，默认为空则表示回滚到上一个版本
+release_version: ''

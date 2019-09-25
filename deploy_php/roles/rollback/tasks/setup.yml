@@ -1,0 +1,39 @@
+---
+- name: Get rollback basedir
+  stat:
+    path: "{{ rollback_basedir }}" 
+  register: stat_rollback_basedir
+
+- name: Get release count
+  shell: echo $(ls -lt {{ rollback_basedir }} | wc -l)
+  register: versions_count
+  when: stat_rollback_basedir.stat.exists == true 
+
+- name: Check there is more than one release
+  fail:
+    msg: "Could not found rollback version"
+  when: versions_count.stdout | int <= 1
+
+- name: Get specified rollback release path
+  stat:
+    path: "{{ rollback_basedir }}/{{ release_version }}"
+  register: stat_rollback_release_path
+  when: release_version != ""
+
+- name: Check the provided rollback release exists
+  fail:
+    msg: "Specified rollback version does not exist"
+  when: release_version !="" and (stat_rollback_release_path.stat.exists is not defined or stat_rollback_release_path.stat.isdir == false) 
+
+- name: Get previous releases version
+  shell: echo $(ls -1t {{ rollback_basedir }} | head -n 2 | tail -n 1 | awk '{print $NF}')
+  register: previous_release_version
+ 
+- name: Get rollback release version
+  shell: echo "{{ release_version if release_version !='' else previous_release_version.stdout }}"
+  register: rollback_release_version
+
+- name: Get rollback release path info
+  stat: 
+    path: "{{ rollback_basedir }}/{{ rollback_release_version.stdout }}"
+  register: rollback_release_path

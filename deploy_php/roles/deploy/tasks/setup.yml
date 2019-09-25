@@ -1,0 +1,29 @@
+---
+- name: Get src code path info
+  stat:
+    path: "{{ code_path }}"
+  register: stat_code_path
+
+- name: Ensure code src path exist
+  fail:
+    msg: "Code src path not exist"
+  when: stat_code_path.stat.exists == false
+
+- name: Ensure deployment basedir exists
+  file:
+    state: directory
+    path: "{{ deploy_basedir }}"
+
+- name: Ensure release path exists
+  file:
+    state: directory
+    path: "{{ deploy_basedir }}/{{ release_version }}"
+  register: release_path
+
+- name: Yum install rsync
+  yum:
+    name: rsync
+    state: latest
+
+
+   

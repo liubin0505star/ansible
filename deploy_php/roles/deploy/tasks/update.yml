@@ -1,0 +1,23 @@
+---
+- name: Sync release code to release_path
+  synchronize:
+    src: "{{ code_path }}/"
+    dest: "{{ release_path.path }}/"
+    delete: yes
+    archive: yes
+    compress: yes
+    rsync_opts: 
+      - "--exclude=.git/"
+    
+- name: Change code file attribute
+  file:
+    path: "{{ release_path.path }}"
+    owner: "nginx"
+    group: "nginx"
+    recurse: yes
+
+- name: Change application link to new release
+  file:
+    state: link
+    path: "{{ app_path }}"
+    src: "{{ release_path.path }}"

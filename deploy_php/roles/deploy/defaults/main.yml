@@ -1,0 +1,12 @@
+---
+# 代码部署的目标目录所在路径
+deploy_basedir: "/opt/app/{{ job_name }}"
+
+# 应用的路径
+app_path: "/var/www/{{ job_name }}"
+
+# 源代码的实际源路径
+code_path: "/var/lib/jenkins/workspace/{{ job_name }}"
+
+# 保留最近版本的数量，例如设置为5，则只保留最近5份，其余版本会被删除，默认值为-1表示不清理版本
+keep_releases: -1

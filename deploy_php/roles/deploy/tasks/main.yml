@@ -1,0 +1,7 @@
+---
+- include_tasks: setup.yml
+  when: job_name is defined and release_version is defined
+- include_tasks: update.yml
+  when: job_name is defined and release_version is defined and release_path.state == 'directory'
+- include_tasks: cleanup.yml
+

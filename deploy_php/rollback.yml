@@ -1,0 +1,5 @@
+---
+- hosts: web-php
+  gather_facts: false
+  roles:
+  - rollback 
