@@ -10,26 +10,26 @@
 
 ## 发布代码的三种使用方式
 
-### 直接使用当前发布服务器的时间作为版本号,不手动指定版本号
+* 直接使用当前发布服务器的时间作为版本号,不手动指定版本号
 `ansible-playbook -e "job_name=wordpress release_version=$(date +%Y%m%d%H%M%S)" /etc/ansible/deploy.yml`
 
-### 结合 Jenkins，使用 git tag 作为版本号
+* 结合 Jenkins，使用 git tag 作为版本号
 `ansible-playbook -e "job_name=wordpress release_version=${tag}" /etc/ansible/deploy.yml`
 
-### 发布代码的同时，也设置保留多少个历史版本,其他的老版本将被删除
+* 发布代码的同时，也设置保留多少个历史版本,其他的老版本将被删除
 `ansible-playbook -e "job_name=wordpress release_version=$(date +%Y%m%d%H%M%S) keep_releases=3" /etc/ansible/deploy.yml`
 
 # 回滚：
 
 ## 回滚代码的三种方式：
 
-### 不选择版本号，直接回滚到上一次稳定版本
+* 不选择版本号，直接回滚到上一次稳定版本
 `ansible-playbook -e "job_name=wordpress" /etc/ansible/rollback.yml`
 
-### 如果使用时间作为版本号，根据线上已经存在的历史版本，通过指定版本号，回滚到这个指定的版本
+* 如果使用时间作为版本号，根据线上已经存在的历史版本，通过指定版本号，回滚到这个指定的版本
 `ansible-playbook -e "job_name=wordpress release_version=20190925144115" /etc/ansible/rollback.yml`
 
-### 如果使用 git tag 作为版本号，根据线上已经存在的历史版本，通过指定版本号，回滚到这个指定的版本
+* 如果使用 git tag 作为版本号，根据线上已经存在的历史版本，通过指定版本号，回滚到这个指定的版本
 `ansible-playbook -e "job_name=wordpress release_version=v1.0.1" /etc/ansible/rollback.yml`
 
 # 我的博客:
