@@ -4,11 +4,6 @@
     path: "{{ code_path }}"
   register: stat_code_path
 
-- name: Ensure code src path exist
-  fail:
-    msg: "Code src path not exist"
-  when: stat_code_path.stat.exists == false
-
 - name: Ensure deployment basedir exists
   file:
     state: directory
