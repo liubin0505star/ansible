@@ -35,4 +35,4 @@
 
 # 我的博客:
 
-更多IT运维相关内容详情欢迎访问我的博客： [我的ROOT](http://wdroot.com)
+更多IT运维相关内容详情欢迎访问我的博客： [我的ROOT](https://blog.51cto.com/liubin0505star)
